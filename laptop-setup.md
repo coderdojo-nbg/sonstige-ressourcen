@@ -10,11 +10,22 @@ Der Computername sollte "coderdojo" plus Zahl sein (z.B. "coderdojo6")
 
 Während der Installation wird ein Nutzer mit Superuser-Rechten angelegt ("ruth"). Nach der Installationen einen Standardnutzer mit dem gleichen Namen wie der Computer anlegen. Dieser Account soll keine Superuser-Rechte haben und ist für die Kinder gedacht. Benutzername und Passwort mittels Labeldrucker auf den Computer kleben.
 
+## Einstellungen
+
+In den Systemeinstellungen unter "Anwendungen & Aktualisierung" -> "Aktualisierungen" bei "Nach Aktualisierungen suchen" die Option "Nie" auswählen. Damit wird verhindert, dass Ubuntu die Kinder mit Benachrichtigungen nervt. Updates müssen sowieso durch die Mentoren eingespielt werden.
+
 ## Admintools
 
 ```bash
 sudo apt-get install aptitude vim curl
 ```
+
+Danach kann das System aktualisiert werden.
+
+```bash
+sudo aptitude update
+sudo aptitude safe-upgrade
+````
 
 # Programme
 
@@ -27,21 +38,21 @@ Diese Prgramme werden als Superuser ("ruth") installiert.
 Emacs, Java (JDK), Sonic-Pi, Pythontools
 
 ```bash
-sudo aptitude emacs openjdk-8-jdk sonic-pi python3 idle3 python3-pip
+sudo aptitude install emacs openjdk-8-jdk sonic-pi sonic-visualiser python3 idle3 python3-pip git
 ```
 
 Bei der Konfiguration von `jackd` die Echtzeitpriorisierung ablehnen.
 
 ### Als Debianpaket
 
-Chrome und Visual Studio Code können als Debianpaket runtergeladen werden.
+[Chrome](https://www.google.de/chrome/index.html) und [Visual Studio Code](https://code.visualstudio.com/Download) können als Debianpaket runtergeladen werden.
 
 Für die Installation in das Downloadverzeichnis wechseln und `dpkg` verwenden. Bei der Installation wird ein Eintrag für das Repository erzeugt, Aktualisierungen erfolgen dann beim normalen Update.
 
 ```bash
 cd <VERZEICHNIS>
 sudo dpkg -i <DEBIANPAKET>
-sudo apt-get -f installieren
+sudo apt-get -f install
 ```
 ### Atom
 
@@ -95,7 +106,7 @@ Bei der Installation können die Standardeinstellungen übernommen werden.
 ### Plugins für Atom
 
 ```bash
-apm parinfer autoclose-html highlight-line markdown-writer tabs-to-spaces linter linter-eslint
+apm install parinfer autoclose-html highlight-line markdown-writer tabs-to-spaces linter linter-eslint
 ```
 
 ### Plugins für Visual Studio
@@ -114,6 +125,8 @@ command -v nvm
 nvm install node
 ```
 
+Wenn `command -v nvm` nichts zurückgibt, das Terminal schließen, neu öffnen und nochmal versuchen.
+
 Damit ist aktuelleste Version von Node installiert. Ein paar Node-Module können installiert werden. Dafür zunächst `npm` initialisieren, es können die Standardwerte übernommen werden.
 
 ```bash
@@ -121,7 +134,7 @@ npm init
 npm install http-server typescript tslint eslint
 ```
 
-Weiter Infos zu [nvm](https://github.com/creationix/nvm).
+Weitere Infos zu [nvm](https://github.com/creationix/nvm).
 
 ### Processing
 
@@ -129,7 +142,7 @@ Aktuelle [Version](https://processing.org/download/) runterladen, in `local` spe
 
 ```bash
 cd processing-xxxx
-./Processing
+./install.sh
 ```
 
 ### Minecraft-Mods
@@ -173,6 +186,8 @@ java -jar ./spigot-xxxx.jar
 Der Server startet jetzt nicht, sondern gibt eine Fehlermeldung aus, weil die EULA-Lizenz noch nicht akzeptiert wurde. Es wurde eine Datei "eula.txt" erstellt. In dieser muss **eula=false** zu **eula=true** geändert werden. Dafür die Datei in einem Texteditor, z.B. `vim` oder `gedit` öffnen und die entsprechende Textzeile ändern.
 
 Nun den Server neu starten, nun sollte es funktionieren. Den Server durch Eingabe von `stop` beenden.
+
+Optional: Spigot speichert für jede Minecraftwelt drei Verzeichnisse ab. Um diese in einem gemeinsamen Ordner abzulegen (dafür einen Ordner anlegen z.B. `mcworlds`), muss in der Datei `bukkit.yml` eine Option ergänzt werden. Im Abschnitt `settings` eine neue Zeile mit `ẁorld-container: mcworlds` einfügen.
 
 #### ScriptCraft
 
@@ -225,7 +240,7 @@ Auf der Konsole in das Verzeichnis wechseln.
 
 ```bash
 cd forge
-java -jar ./minecraft-server.1.12.2.jar nogui
+java -jar minecraft-server.1.12.2.jar nogui
 ```
 
 Der Server startet jetzt nicht, sondern gibt eine Fehlermeldung aus, weil
